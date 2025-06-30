@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADIELA - Luxury Experience</title>
+    <meta name="description" content="Una experiencia de lujo inigualable">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./assets/styles/main.css" as="style">
+    <link rel="preload" href="./assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="./assets/styles/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav__container">
+            <div class="nav__logo">
+                <a href="#" class="logo">ADIELA</a>
+            </div>
+            
+            <ul class="nav__menu" id="nav-menu">
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Colección</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Sobre Nosotros</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Experiencia</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#" class="nav__link">Contacto</a>
+                </li>
+            </ul>
+            
+            <div class="nav__toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__video">
+            <video 
+                class="hero__video-element" 
+                autoplay 
+                muted 
+                loop 
+                playsinline>
+                <source src="./assets/videos/social_diegorebolledor_closed_up_de_una_mujer_usando_esmeraldas_tall_7f9800af-d6c8-4943-826f-6fbca2361bf0_1.mp4" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+            </video>
+            <div class="hero__overlay"></div>
+        </div>
+        
+        <div class="hero__content">
+            <div class="hero__text">
+                <h1 class="hero__title">
+                    <span class="hero__title-line">Elegancia</span>
+                    <span class="hero__title-line">Atemporal</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Descubre una nueva dimensión del lujo
+                </p>
+                <div class="hero__cta">
+                    <a href="#collection" class="btn btn--primary">
+                        Explorar Colección
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero__scroll">
+            <span class="hero__scroll-text">Desliza para descubrir</span>
+            <div class="hero__scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Collection Preview -->
+    <section class="collection" id="collection">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nueva Colección</h2>
+                <p class="section-subtitle">Piezas únicas que definen el futuro</p>
+            </div>
+            
+            <div class="collection__grid">
+                <article class="collection__item">
+                    <div class="collection__image">
+                        <img src="./assets/images/collection-1.jpg" alt="Pieza de colección 1" loading="lazy">
+                        <div class="collection__overlay">
+                            <a href="#" class="collection__link">Ver Detalles</a>
+                        </div>
+                    </div>
+                    <div class="collection__info">
+                        <h3 class="collection__name">Esencia Pura</h3>
+                        <p class="collection__price">€2,950</p>
+                    </div>
+                </article>
+                
+                <article class="collection__item">
+                    <div class="collection__image">
+                        <img src="./assets/images/collection-2.jpg" alt="Pieza de colección 2" loading="lazy">
+                        <div class="collection__overlay">
+                            <a href="#" class="collection__link">Ver Detalles</a>
+                        </div>
+                    </div>
+                    <div class="collection__info">
+                        <h3 class="collection__name">Elegancia Infinita</h3>
+                        <p class="collection__price">€3,750</p>
+                    </div>
+                </article>
+                
+                <article class="collection__item">
+                    <div class="collection__image">
+                        <img src="./assets/images/collection-3.jpg" alt="Pieza de colección 3" loading="lazy">
+                        <div class="collection__overlay">
+                            <a href="#" class="collection__link">Ver Detalles</a>
+                        </div>
+                    </div>
+                    <div class="collection__info">
+                        <h3 class="collection__name">Vanguardia Atemporal</h3>
+                        <p class="collection__price">€4,200</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about__content">
+                <div class="about__text">
+                    <h2 class="about__title">Artesanía Excepcional</h2>
+                    <p class="about__description">
+                        Cada pieza de ADIELA nace de la pasión por la perfección. 
+                        Combinamos técnicas tradicionales con innovación contemporánea 
+                        para crear experiencias únicas que trascienden el tiempo.
+                    </p>
+                    <a href="#" class="btn btn--outline">Nuestra Historia</a>
+                </div>
+                <div class="about__image">
+                    <img src="./assets/images/craftsmanship.jpg" alt="Artesanía ADIELA" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <h3 class="footer__logo">ADIELA</h3>
+                    <p class="footer__tagline">Elegancia redefinida</p>
+                </div>
+                
+                <div class="footer__links">
+                    <div class="footer__column">
+                        <h4 class="footer__title">Colección</h4>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Nueva Temporada</a></li>
+                            <li><a href="#" class="footer__link">Clásicos</a></li>
+                            <li><a href="#" class="footer__link">Edición Limitada</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__column">
+                        <h4 class="footer__title">Servicios</h4>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Personalización</a></li>
+                            <li><a href="#" class="footer__link">Consultoría</a></li>
+                            <li><a href="#" class="footer__link">Mantenimiento</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__column">
+                        <h4 class="footer__title">Contacto</h4>
+                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Showroom</a></li>
+                            <li><a href="#" class="footer__link">Concierge</a></li>
+                            <li><a href="#" class="footer__link">Prensa</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2024 ADIELA. Todos los derechos reservados.</p>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link">Instagram</a>
+                    <a href="#" class="footer__social-link">Pinterest</a>
+                    <a href="#" class="footer__social-link">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+</body>
+</html> 
