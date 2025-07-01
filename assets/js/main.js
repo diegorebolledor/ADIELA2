@@ -18,12 +18,14 @@ function initNavigation() {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav__link');
+    const searchBtn = document.getElementById('nav-search');
+    const cartBtn = document.getElementById('nav-cart');
 
     // Mobile menu toggle
     if (navToggle) {
         navToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
     }
 
@@ -31,25 +33,45 @@ function initNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
         });
     });
 
-    // Navigation scroll effect
-    let lastScrollTop = 0;
+    // Search functionality
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            console.log('Search clicked');
+            // Aquí puedes agregar funcionalidad de búsqueda
+        });
+    }
+
+    // Cart functionality
+    if (cartBtn) {
+        cartBtn.addEventListener('click', () => {
+            console.log('Cart clicked');
+            // Aquí puedes agregar funcionalidad del carrito
+        });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Navigation scroll effect (mantener transparente sobre el video)
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Add/remove background based on scroll position
-        if (scrollTop > 50) {
-            nav.style.background = 'rgba(255, 255, 255, 0.98)';
-            nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        if (scrollTop > window.innerHeight - 100) {
+            nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            nav.style.backdropFilter = 'blur(20px)';
         } else {
-            nav.style.background = 'rgba(255, 255, 255, 0.95)';
-            nav.style.boxShadow = 'none';
+            nav.style.background = 'transparent';
+            nav.style.backdropFilter = 'none';
         }
-
-        lastScrollTop = scrollTop;
     });
 }
 
