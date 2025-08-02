@@ -61,16 +61,14 @@ function initNavigation() {
         }
     });
 
-    // Navigation scroll effect (mantener transparente sobre el video)
+    // Navigation scroll effect usando clases CSS
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > window.innerHeight - 100) {
-            nav.style.background = 'rgba(0, 0, 0, 0.9)';
-            nav.style.backdropFilter = 'blur(20px)';
+        if (scrollTop > 100) {
+            nav.classList.add('scrolled');
         } else {
-            nav.style.background = 'transparent';
-            nav.style.backdropFilter = 'none';
+            nav.classList.remove('scrolled');
         }
     });
 }
@@ -78,45 +76,104 @@ function initNavigation() {
 // Hero Video Management
 function initHeroVideo() {
     const video = document.querySelector('.hero__video-element');
+    const fallback = document.querySelector('.hero__video-fallback');
+    let videoLoaded = false;
+    let playAttempts = 0;
+    const maxPlayAttempts = 3;
     
-    if (video) {
-        // Ensure video plays on mobile devices when possible
+    if (video && fallback) {
+        // Start with fallback visible
+        fallback.style.display = 'block';
+        video.style.opacity = '0';
+        
+        // Video loading success
         video.addEventListener('loadeddata', () => {
-            if (video.readyState >= 3) {
-                video.play().catch(error => {
-                    console.log('Video autoplay prevented:', error);
-                    // Fallback: show poster image
-                    video.style.display = 'none';
-                    const poster = video.getAttribute('poster');
-                    if (poster) {
-                        const videoContainer = video.parentElement;
-                        videoContainer.style.backgroundImage = `url(${poster})`;
-                        videoContainer.style.backgroundSize = 'cover';
-                        videoContainer.style.backgroundPosition = 'center';
-                    }
-                });
+            console.log('Video loaded successfully');
+            videoLoaded = true;
+            attemptVideoPlay();
+        });
+        
+        // Video can play through
+        video.addEventListener('canplaythrough', () => {
+            console.log('Video can play through');
+            videoLoaded = true;
+            attemptVideoPlay();
+        });
+        
+        // Video starts playing successfully
+        video.addEventListener('playing', () => {
+            console.log('Video playing successfully');
+            video.style.opacity = '1';
+            fallback.style.display = 'none';
+        });
+        
+        // Video errors
+        video.addEventListener('error', (e) => {
+            console.error('Video error:', e);
+            showFallback();
+        });
+        
+        // Video stalled
+        video.addEventListener('stalled', () => {
+            console.warn('Video stalled');
+            setTimeout(() => {
+                if (!videoLoaded) {
+                    showFallback();
+                }
+            }, 3000);
+        });
+        
+        // Attempt to play video
+        function attemptVideoPlay() {
+            if (playAttempts >= maxPlayAttempts) {
+                showFallback();
+                return;
             }
-        });
-
-        // Optimize video performance
-        video.addEventListener('canplay', () => {
-            video.play().catch(() => {
-                // Silent fail - video will show poster instead
+            
+            playAttempts++;
+            video.play().then(() => {
+                console.log('Video autoplay successful');
+            }).catch((error) => {
+                console.log(`Video autoplay attempt ${playAttempts} failed:`, error);
+                
+                if (playAttempts >= maxPlayAttempts) {
+                    showFallback();
+                } else {
+                    // Retry after delay
+                    setTimeout(attemptVideoPlay, 1000);
+                }
             });
-        });
-
-        // Pause video when not in viewport (performance optimization)
+        }
+        
+        // Show fallback background
+        function showFallback() {
+            console.log('Showing video fallback');
+            video.style.display = 'none';
+            fallback.style.display = 'block';
+        }
+        
+        // Intersection Observer for performance
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    video.play().catch(() => {});
+                if (entry.isIntersecting && videoLoaded) {
+                    video.play().catch(() => {
+                        showFallback();
+                    });
                 } else {
                     video.pause();
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         observer.observe(video);
+        
+        // Force fallback after timeout if video doesn't load
+        setTimeout(() => {
+            if (!videoLoaded) {
+                console.log('Video loading timeout - showing fallback');
+                showFallback();
+            }
+        }, 5000);
     }
 }
 
